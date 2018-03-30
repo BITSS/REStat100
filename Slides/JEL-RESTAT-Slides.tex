@@ -1,0 +1,651 @@
+
+\documentclass{beamer} 
+
+
+\mode<presentation>
+{
+  \usetheme{Berkeley}
+  % or ...
+
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+\usepackage{epstopdf}
+% or whatever
+
+\usepackage[utf8]{inputenc}
+% or whatever
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+\title[Transparency, Reproducibility, and the Credibility of Economics Research] % (optional, use only with long paper titles)
+{Transparency, Reproducibility, and the Credibility of Economics Research}
+
+\subtitle
+{}
+
+\author[Christensen] % (optional, use only with lots of authors)
+{Garret~Christensen\inst{1} \\
+Edward~Miguel\inst{2}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Universities of Somewhere and Elsewhere] % (optional, but mostly needed)
+{
+  \inst{1}%
+  UC Berkeley:\\
+  Berkeley Initiative for Transparency in the Social Sciences\\
+  Berkeley Institute for Data Science\\
+  \inst{2} UC Berkeley\\
+  National Bureau of Economics Research\\
+  }
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+
+\date[BITSS2014] % (optional, should be abbreviation of conference name)
+{March 2018\\
+Slides available online at \url{http://www.github.com/BITSS/REStat100}}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Research Transparency}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+\pgfdeclareimage[height=2cm]{university-logo}{../Images/BITSSlogo.png}
+\logo{\pgfuseimage{university-logo}}
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+\beamerdefaultoverlayspecification{<.->}
+
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+
+
+% Structuring a talk is a difficult task and the following structure
+% may not be suitable. Here are some rules that apply for this
+% solution: 
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% - A conference audience is likely to know very little of what you
+%   are going to talk about. So *simplify*!
+% - In a 20min talk, getting the main ideas across is hard
+%   enough. Leave out details, even if it means being less precise than
+%   you think necessary.
+% - If you omit details that are vital to the proof/implementation,
+%   just say so once. Everybody will be happy with that.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{Outline}
+%  %\tableofcontents
+%  % You might wish to add the option [pausesections]
+%\end{frame}
+\section {Introduction}
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+                \href{https://www.bitss.org/}{\includegraphics[width=\paperwidth]{../Images/bitsslogo.png}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+\begin{frame}{Outline}
+Problems
+\begin{itemize}
+\item Publication Bias 
+\item P-Hacking
+\end{itemize}
+Potential Solutions
+\begin{itemize}
+\item Registration
+\item Pre-Analysis Plans
+\item Registered Reports
+\item Data Sharing
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{frame}{Ethical Research}
+%Why we worry:
+%\begin{itemize}[<.->]
+%\item \href{http://www.jstor.org/stable/pdf/10.1525/jer.2007.2.4.3.pdf}{(Anderson, Martinson, De Vries 2007)}
+%\item \href{http://pss.sagepub.com/content/23/5/524}{(John, Loewenstein, Prelec 2011)}
+%\end{itemize}
+%\end{frame}
+%
+%{ % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain]
+%        \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[width=\paperwidth]{../Images/AMdV2007.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+%{ % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain]
+%        \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[height=\paperheight]{../Images/PrelecFig1.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Registrations}
+
+%\subsection*{Publication Bias}
+%\begin{frame}{Publication Bias}%{Subtitles are optional.}
+%% - A title should summarize the slide in an understandable fashion
+%%   for anyone how does not follow everything on the slide itself.
+%Existence of the problem:
+%\begin{itemize}
+%\item
+%Effect sizes diminish with sample size (\href{http://pan.oxfordjournals.org/content/9/4/385.short}{Gerber, Green, Nickerson 2001})
+%\item
+%There is a higher fraction of rejected hypothesis tests in social compared to hard sciences (\href{http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0010068}{Fanelli 2010}).
+%\item
+%	Published null results are disappearing over time, in all disciplines (\href{http://link.springer.com/article/10.1007/s11192-011-0494-7}{Fanelli 2011}). 
+%\item
+%	Data on the complete set of experiments run shows strong results are 40pp more likely to be published, and 60pp more likely to be written up. The file drawer problem is large. (\href{http://science.sciencemag.org/content/345/6203/1502}{Franco, Malhotra, Simonovits 2014})
+%\end{itemize}
+%\end{frame}
+%
+%%Go through the fields
+
+%\begin{frame}{Publication Bias}
+%Publication bias \& P-hacking are widespread, including in economics:
+%\begin{itemize}[<.->]
+%\item Medicine: \href{http://www.nejm.org/doi/full/10.1056/nejmsa065779}{(Turner et al. 2008)}
+%\item Social Sciences: \href{http://science.sciencemag.org/content/345/6203/1502.short}{(Franco, Malhotra, Simonovits 2014)}
+%\item Economics: \href{https://www.aeaweb.org/articles.php?doi=10.1257/app.20150044}{(Brodeur et al. 2016)}
+%\item Sociology: \href{http://smr.sagepub.com/content/37/1/3.short}{(Gerber and Malhotra 2008)}
+%\item Political Science: \href{http://nowpublishers.com/article/Details/QJPS-8024}{(Gerber and Malhotra 2008)}
+%\end{itemize}
+%\end{frame}
+
+
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{http://science.sciencemag.org/content/345/6203/1502}{ \includegraphics[height=\paperheight]{../Images/Tess.PNG}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.aeaweb.org/articles?id=10.1257/app.20150044}{ \includegraphics[height=\paperheight]{../Images/Brodeur.PNG}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+%{ % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain]
+%        \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[height=\paperheight]{../Images/GerberSoc.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+%{ % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain]
+%        \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[height=\paperheight]{../Images/GerberPS.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+
+%
+%
+%
+%
+%\subsection*{Registrations}
+%\begin{frame}{Registration}
+%Registration as Solution to Publication Bias:
+% \begin{itemize}
+%  \item
+%   Publicly stating all research you will do, what hypotheses you will test, prospectively.
+%   %\item If we know every hypothesis test that is run on a given subject, we have a better idea of how seriously to take the significant results.
+%  \item
+%   Near universal adoption in medical RCTs. Top journals (ICMJE) won't publish if it's not registered. \url{http://clinicaltrials.gov}
+%  \item
+%   Even better if registry requires outcomes from after study. Currently limited, but NIH is moving on this.
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Registration}
+% Newer to social sciences, but:
+%   \begin{itemize}[<.->]
+%   \item
+%   	AEA registry, currently only for RCTs. \url{http://socialscienceregistry.org}
+%   \item
+%    EGAP registry \url{http://egap.org/design-registration}
+%   \item 
+%    3ie registry, for developing country evaluations. \url{http://ridie.3ieimpact.org}
+%   \item
+%   	Open Science Framework\\ \url{http://osf.io}
+%   	\begin{itemize}
+%   	\item
+%   	Open format
+%   	\item
+%   	Will soon sync with above
+%   	\end{itemize}
+%   	\item Simple: \url{http://aspredicted.org}
+%   \end{itemize}
+% 
+%\end{frame}
+
+ { % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+                \includegraphics[height=\paperheight]{../Images/combinedAEARegGraphs.PNG}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+%\begin{frame}{Design-Based Publication}
+%AKA Registered Reports, moves peer review before data gathering, results, and analysis.
+%
+%\begin{enumerate}[<.->]
+%\item Design a project
+%\item Submit
+%\item Reviewed based on importance of question and quality of design
+%\item Get in-principle acceptance
+%\item Follow through, and nulls get published
+%\end{enumerate}
+%\href{https://osf.io/8mpji/wiki/home/}{75 Journals, 20 more with Special Issues \beamergotobutton{Link}}
+%\end{frame}
+
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+                \includegraphics[height=\paperheight]{../Images/results_blind_review.png}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+                \includegraphics[width=\paperwidth]{../Images/JDE_reg_report.png}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+
+
+%{ % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain]
+%        \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[width=\paperwidth]{../Images/Stanley2017.png}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Pre-Analysis Plans}
+%\subsection*{P-Hacking}
+%\begin{frame}[<.->]{P-Hacking}
+%Define the problem:
+%\begin{itemize}
+%\item
+%Also called fishing, researcher degrees of freedom, or data-mining.
+%\item
+%Definition: flexibility in data analysis allows portrayal of \textit{anything} as below an arbitrary p-value threshhold; significance loses its meaning.
+%\item
+%Not something only evil people do. It's subconcious, or simply built into statistics (\href{http://www.stat.columbia.edu/~gelman/research/unpublished/p_hacking.pdf}{Gelman, Loken 2013}).
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{P-Hacking is fun!}
+%\begin{itemize}
+%\item
+%``Science isn't Broken'' ---538 journalism piece with interactive demo \href{http://fivethirtyeight.com/features/science-isnt-broken}{\beamerbutton{Link}}
+%\item 
+%Train your p-hacking skills R/Shiny App. \href{http://www.nicebread.de/introducing-p-hacker/}{\beamerbutton{Link}}
+%\item
+%An Exact Fishy Test \href{https://macartan.shinyapps.io/fish/}{\beamerbutton{Link}}
+%\end{itemize}
+%\end{frame}
+
+%{ % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain]
+%        \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[width=\paperwidth]{../Images/Crowdsourcing2.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+
+\subsection*{Pre-Analysis Plan}
+\begin{frame}{Pre-Analysis Plan}
+From 3ie:
+\begin{quote}
+ ``A pre-analysis plan is a detailed description of the analysis to be conducted that is written in advance of seeing the data on impacts of the program being evaluated. It may specify hypotheses to be tested, variable construction, equations to be estimated, controls to be used, and other aspects of the analysis. A key function of the pre-analysis plan is to increase transparency in the research. By setting out the details in advance of what will be done and before knowing the results, the plan guards against data mining and specification searching.''
+\end{quote}
+\end{frame}
+
+%\begin{frame}{Origin: FDA's Guidance for Industry}
+%``E9 Statistical Principles for Clinical Trials'' (1998)
+%\href{http://www.fda.gov/downloads/drugs/guidancecomplianceregulatoryinformation/guidances/ucm073137.pdf}{\beamergotobutton{Link}}
+%
+%\S V Data Analysis Considerations
+%\begin{enumerate}[<.->]
+%\item Prespecification of the Analysis
+%\item Analysis Sets
+%\item Missing Values and Outliers
+%\item Data Transformation
+%\item Estimation, Confidence Intervals, and Hypothesis Testing
+%\item Adjustment of Significance and Confidence Levels
+%\item Subgroups, Interactions, and Covariates
+%\item Integrity of Data and Computer Software Validity
+%\end{enumerate}
+%\end{frame}
+%
+%
+%\begin{frame}{Examples}
+%
+%\begin{itemize}[<.->]
+%\item
+%J-PAL Hypothesis Registry (11), see \url{http://www.povertyactionlab.org/Hypothesis-Registry}
+%
+%6 published papers:
+%\begin{itemize}
+%\item
+% Sierra Leone CDD, Oregon Medicare, Turkey Job Training, El Salvador TOMS, two in Indonesia (Olken et al.)
+%\end{itemize}
+%\item Psychology: \href{http://pss.sagepub.com/content/26/2/249}{Hawkins, Fitzgerald, Nosek---Conception Risk and Prejudice}
+%\end{itemize} 
+%\vspace{0.25in}
+%Wide range of when exactly to write and how detailed to make the plan. At the extreme level of detail you would have your entire code already written before you got any data.
+%\end{frame}
+
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.povertyactionlab.org/sites/default/files/publications/45_reshaping\%20institutions\%20QJE.pdf}{ \includegraphics[width=\paperwidth]{../Images/GoBifo1.PNG}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{PAP--Observational Studies}
+%\begin{itemize}[<.->]
+%\item Debated in public health/epidemiology.
+%\item Difficult, but not impossible, to verifiably pre-specify.
+%\item Example: Government data releases
+%\item Example: Minimum Wage (\href{http://onlinelibrary.wiley.com/doi/10.1111/0019-8676.00199/full}{Neumark 2001})
+%\item Example: \href{https://www.erpc2016.com/}{US}, \href{http://www.itanes.org/2016/11/21/2016-italian-constitutional-referendum-research-preacceptance-competition/}{Italian Elections}
+%\end{itemize}
+%\end{frame}
+
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://onlinelibrary.wiley.com/doi/abs/10.1111/0019-8676.00199}{ \includegraphics[width=\paperwidth]{../Images/Neumark.PNG}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+{ % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.erpc2016.com/}{ \includegraphics[width=\paperwidth]{../Images/erpc2016.PNG}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Replication}
+%\begin{frame}{Replication}
+%\begin{enumerate}[<.->]
+% \item Lack of replicability in code:
+% \begin{itemize}
+% \item	\href{http://www.jstor.org/stable/1806061}{1986: JMCB Project} 
+% \item  \href{https://www.nature.com/articles/d41586-018-02108-9}{2018: Gertler, Galiani, Romero}
+% \end{itemize}
+% \item Also a lack of replicability in experiments: Camerer et al 2016, Many Labs, Reproduciblity Project: Psychology 
+% \item Project Protocol, Reporting Standards
+% \item Organizing Workflow
+% \item Code \& Data Sharing
+%\end{enumerate}
+%\end{frame}
+
+ { % all template changes are local to this group.
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.jstor.org/stable/1806061}{ \includegraphics[width=\paperwidth]{../Images/JMCB1.PNG}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+  
+%     \begin{frame}[plain]
+%         \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[height=\paperheight]{../Images/Bohannon.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%
+%\begin{frame}[plain]
+%         \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[height=\paperheight]{../Images/Camerer.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+     
+     
+      \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.nature.com/articles/d41586-018-02108-9}{ \includegraphics[width=\paperwidth]{./ProprietaryDataGraphYEAR.eps}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+     
+     
+     \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.nature.com/articles/d41586-018-02108-9}{ \includegraphics[height=\paperheight]{../Images/Gertler_Nature2.jpg}}
+            };
+        \end{tikzpicture}
+     \end{frame}
+    
+      \begin{frame}[plain]
+         \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               \href{https://www.nature.com/articles/d41586-018-02108-9}{ \includegraphics[width=\paperwidth]{../Images/Gertler_Nature1.jpg}}
+            };
+        \end{tikzpicture}
+     \end{frame} 
+     
+  
+
+%\begin{frame}[plain]
+%         \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%            \href{https://osf.io/wx7ck/}{
+%                \includegraphics[width=\paperwidth]{../Images/ManyLabs.PNG}}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%   \begin{frame}[plain]
+%         \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] { \href{http://science.sciencemag.org/content/349/6251/aac4716.full?ijkey=1xgFoCnpLswpk&keytype=ref&siteid=sci}{
+%                \includegraphics[height=\paperheight]{../Images/rpp.jpg}}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%
+%
+%}
+%
+%
+%\subsection*{Project Protocol, Reporting Standards}
+%\begin{frame}[<.->]{Project Protocol, Reporting Standards}
+% Make sure you report everything another researcher would need to replicate your research.
+% \begin{itemize}
+% \item Find the appropriate reporting standard for your field and follow it: \url{http://www.equator-network.org}
+%\item Report the nuts and bolts of the project implementation in a detailed protocol: \url{http://www.spirit-statement.org}
+%\item Transparency and Openness Promotion (TOP) Guidelines: \url{http://cos.io/top}
+%\end{itemize}
+%\end{frame}
+%
+% { % all template changes are local to this group.
+%    \setbeamertemplate{navigation symbols}{}
+%    \begin{frame}[plain, label=AEAreg]
+%         \begin{tikzpicture}[remember picture,overlay]
+%            \node[at=(current page.center)] {
+%                \includegraphics[width=\paperwidth]{../Images/TOPGuidelines.PNG}
+%            };
+%        \end{tikzpicture}
+%     \end{frame}
+%}
+
+%\subsection*{Data Sharing}
+%\begin{frame}{Data Sharing}
+%Post your code and your data in a trusted public repository.
+%\begin{itemize}[<.->]
+%\item
+%Find the appropriate repository: \url{http://www.re3data.org/}
+%\item
+%Repositories will last longer than your own website.
+%\item
+%Repositories are more easily searchable by other researchers.
+%\item
+%Repositories will store your data in a non-proprietary format that won't become obsolete.
+%\end{itemize}
+%\end{frame}
+%
+%\section{Conclusion}
+%\begin{frame}{Conclusion}
+%OK, I'm convinced. How do I implement this in my own research?
+%
+%\begin{itemize}[<.->]
+%\item Read the manual I wrote.\href{https://github.com/garretchristensen/BestPracticesManual}{\beamergotobutton{Link}}
+%\item Read our JEL piece. \href{https://www.aeaweb.org/articles?id=10.1257/jel.20171350}{\beamergotobutton{Link}}
+%\item Subscribe to the BITSS blog \& E-mail list \href{https://bitss.org/blog}{\beamergotobutton{Link}}
+%\item Apply for our NIH Research Transparency \& Reproducibility Training (RT2). \href{http://www.bitss.org/events/summer-institute/}{\beamergotobutton{Link}}
+%%\item Apply for our SSMART Grants (extra funding for developing country researchers). \href{http://www.bitss.org/ssmart-grants/}{\beamergotobutton{Link}}
+%%\item Apply for our Leamer-Rosenthal Prizes. \href{http://www.bitss.org/lr-prizes/}{\beamergotobutton{Link}}
+%\end{itemize}
+%\end{frame}
+%
+
+%\begin{frame}{SSMART Grant}
+%Up to \$30,000 grant for a research project on:
+%\begin{itemize}[<.->]
+%\item Develop new methodology
+%\item New tools and approaches for meta-analysis
+%\item Research on researchers and adoption of new norms
+%\end{itemize}
+%Extra funding source for researchers from developing countries.
+%
+%\includegraphics[width=2.5in]{../Images/LRwinners.jpg}
+%\end{frame}
+%
+%\begin{frame}{Leamer-Rosenthal Prizes}
+%Up to \$10,000 prize for completed transparent research in the social sciences,
+%especially:
+%\begin{itemize}[<.->]
+%\item Economics
+%\item Political Science
+%\item Psychology
+%\end{itemize}
+%\includegraphics[width=2.5in]{../Images/leamer1-zoomed33.jpg}
+%\end{frame}
+
+
+%\begin{frame}
+%\begin{center}
+%Questions?
+%\vspace{1in}
+%
+%
+%\Huge{Thank you!}
+%\end{center}
+%\end{frame}
+
+\end{document}
+
